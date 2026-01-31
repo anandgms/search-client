@@ -1,0 +1,4 @@
+/.idea/
+/search-client-api/target/
+/search-client-api/.mvn/
+/search-client-oss-impl/target/
