@@ -1,5 +1,10 @@
 package edu.anand.search.api.request;
 
+import edu.anand.search.api.request.facet.Facet;
+import edu.anand.search.api.request.filter.Filter;
+import edu.anand.search.api.request.query.Query;
+import edu.anand.search.api.request.query.SimpleQuery;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +19,7 @@ public class SearchRequest {
     private List<String> includeFields;
     private List<String> excludeFields;
     private Highlight highlight;
+    private boolean fuzzy;
 
     public String asString() {
         return query.asString();
@@ -21,6 +27,20 @@ public class SearchRequest {
 
     public SearchRequest() {
         this.query = new SimpleQuery("*:*");
+    }
+
+    public boolean fuzzy() {
+        return fuzzy;
+    }
+
+    public SearchRequest enableFuzzySearch() {
+        this.fuzzy = true;
+        return this;
+    }
+
+    public SearchRequest disableFuzzySearch() {
+        this.fuzzy = true;
+        return this;
     }
 
     public String index() {
@@ -41,13 +61,8 @@ public class SearchRequest {
         return this;
     }
 
-    public int size() {
+    public int limit() {
         return size;
-    }
-
-    public SearchRequest setSize(int size) {
-        this.size = size;
-        return this;
     }
 
     public Query query() {
@@ -113,10 +128,24 @@ public class SearchRequest {
         return this;
     }
 
-    public void addFilter(Filter filter) {
+    public SearchRequest addFilter(Filter filter) {
         if (filters == null) {
             filters = new ArrayList<>();
         }
         filters.add(filter);
+        return this;
+    }
+
+    public SearchRequest addFacet(Facet facet) {
+        if (facets == null) {
+            facets = new ArrayList<>();
+        }
+        facets.add(facet);
+        return this;
+    }
+
+    public SearchRequest limit(int count) {
+        this.size = count;
+        return this;
     }
 }

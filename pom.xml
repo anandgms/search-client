@@ -17,7 +17,8 @@
 
     <modules>
         <module>search-client-api</module>
-        <module>search-client-oss-impl</module>
+        <module>search-client-osj-impl</module>
+        <module>search-client-rhlc-impl</module>
     </modules>
 
     <properties>

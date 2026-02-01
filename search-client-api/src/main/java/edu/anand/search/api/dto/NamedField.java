@@ -5,6 +5,6 @@ import java.util.HashMap;
 public class NamedField extends HashMap<String, Object> implements Document {
 
     @Override
-    public String getId() {
+    public String docId() {
         return get("id").toString();
     }}

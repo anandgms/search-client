@@ -1,7 +1,6 @@
 package edu.anand.search.api.service;
 
 import edu.anand.search.api.dto.Document;
-import edu.anand.search.api.request.FuzzyRequest;
 import edu.anand.search.api.request.SearchRequest;
 import edu.anand.search.api.result.OperationResult;
 import edu.anand.search.api.result.SearchResult;
@@ -97,14 +96,14 @@ public interface SearchClient {
      * Deletes the given document from the specified index.
      */
     default <T extends Document> OperationResult delete(String indexName, T document){
-        return deleteById(indexName, document.getId());
+        return deleteById(indexName, document.docId());
     }
 
     /**
      * Deletes a collection of documents from the specified index.
      */
     default <T extends Document> OperationResult delete(String indexName, Collection<T> documents){
-        return deleteById(indexName, documents.stream().map(Document::getId).toList());
+        return deleteById(indexName, documents.stream().map(Document::docId).toList());
     }
 
     /**
@@ -133,12 +132,7 @@ public interface SearchClient {
     /**
      * Finds all documents that match the search criteria from the specified index.
      * Pagination is controlled using the page and row properties in the SearchRequest.
+     * Note: Use the enableFuzzySearch method to perform n-gram searches.
      */
     SearchResult search(String indexName, SearchRequest request);
-
-    /**
-     * Finds documents where a given field matches the search term. Case-insensitive and allows
-     * minor spelling errors in the search term. Intended for suggest and auto-completion.
-     */
-    SearchResult fuzzySearch(String indexName, FuzzyRequest request);
 }

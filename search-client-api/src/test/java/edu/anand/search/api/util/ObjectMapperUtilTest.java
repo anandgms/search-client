@@ -35,7 +35,7 @@ class ObjectMapperUtilTest {
         TestRecord record = new TestRecord(id, localDate, localTime, localDateTime, zonedDateTime, date, colors);
         String EXPECTED_JSON = "{\"id\":\"12345-67890\",\"localDate\":[2020,4,1],\"localTime\":[13,12,31],\"localDateTime\":[2020,4,1,13,12,31],\"zonedDateTime\":1585761151.000000000,\"date\":1585761151000,\"colors\":[\"blue\",\"red\",\"yellow\"]}";
 
-        String result = ObjectMapperUtil.toJson(record);
+        String result = ObjectMapperUtil.asJson(record);
 
         assertEquals(EXPECTED_JSON, result);
     }
@@ -44,7 +44,7 @@ class ObjectMapperUtilTest {
     void jsonToObject() {
         String JSON = "{\"id\":\"12345-67890\",\"localDate\":[2020,4,1],\"localTime\":[13,12,31],\"localDateTime\":[2020,4,1,13,12,31],\"zonedDateTime\":1585761151.000000000,\"date\":1585761151000,\"colors\":[\"blue\",\"red\",\"yellow\"]}";
 
-        TestRecord result = ObjectMapperUtil.toObject(JSON, TestRecord.class);
+        TestRecord result = ObjectMapperUtil.to(JSON, TestRecord.class);
 
         assertAll(
                 () -> assertNotNull(result),
@@ -69,7 +69,7 @@ class ObjectMapperUtilTest {
         map.put("date", date);
         map.put("colors", colors);
 
-        TestRecord result = ObjectMapperUtil.toObject(map, TestRecord.class);
+        TestRecord result = ObjectMapperUtil.to(map, TestRecord.class);
 
         assertAll(
                 () -> assertNotNull(result),
