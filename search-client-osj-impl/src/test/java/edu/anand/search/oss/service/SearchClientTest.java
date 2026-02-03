@@ -168,26 +168,30 @@ class SearchClientTest {
         SearchRequest request = new SearchRequest();
         request.setQuery(new SimpleQuery("*:*"))
 
-// Term Facet
-                .addFacet(new TermFacet("authors", "author", 10))
-// Numeric Range Facet
-                .addFacet(new NumericRangeFacet("priceRanges", "price", 10,
-                        List.of(new Range<>("0-5", 0f, 5f),
-                                new Range<>("5-10",5f, 10f),
-                                new Range<>("10-15",10f, 15f),
-                                new Range<>("15-20",15f, 20f))))
-// Histogram Facet
-                .addFacet(new HistogramFacet("priceIntervals", "price", 10, 1.0))
-// Date Histogram Facet
-                .addFacet(new DateHistogramFacet("publishDates", "publishDate", 10, ChronoField.YEAR))
-// Date Range Facet
-//                .addFacet(new DateRangeFacet("publishDates", "publishDate", 10,
-//                        List.of(
-////                                new Range<>("100y to now", "now-100y/d", "now+1d/d"),
-////                                new Range<>("50y to now", "now-50y/d", "now+1d/d"),
-//                                new Range<>("7d to now", "now-7d", "now+1d")
-//                        )))
+//// Term Facet
+//                .addFacet(new TermFacet("authors", "author", 10))
+//// Numeric Range Facet
+//                .addFacet(new NumericRangeFacet("priceRanges", "price", 10,
+//                        List.of(new Range<>("0-5", 0f, 5f),
+//                                new Range<>("5-10",5f, 10f),
+//                                new Range<>("10-15",10f, 15f),
+//                                new Range<>("15-20",15f, 20f))))
+//// Histogram Facet
+//                .addFacet(new HistogramFacet("priceIntervals", "price", 10, 1.0))
+//// Date Histogram Facet
+//                .addFacet(new DateHistogramFacet("publishDates", "publishDate", 10, ChronoField.YEAR))
+//// Date Range Facet
+////                .addFacet(new DateRangeFacet("publishDates", "publishDate", 10,
+////                        List.of(
+//////                                new Range<>("100y to now", "now-100y/d", "now+1d/d"),
+//////                                new Range<>("50y to now", "now-50y/d", "now+1d/d"),
+////                                new Range<>("7d to now", "now-7d", "now+1d")
+////                        )))
+                .setHighlight(new Highlight(List.of("title"), "and", 10));
+
         ;
+
+
 
         SearchResult result = searchClient.search("books", request);
 

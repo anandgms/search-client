@@ -1,4 +1,6 @@
 package edu.anand.search.api.request;
 
-public class Highlight {
+import java.util.List;
+
+public record Highlight(List<String> fields, String searchTerm, int limit) {
 }

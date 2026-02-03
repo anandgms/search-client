@@ -12,6 +12,9 @@ import org.opensearch.client.opensearch._types.aggregations.*;
 import org.opensearch.client.opensearch._types.query_dsl.BoolQuery;
 import org.opensearch.client.opensearch._types.query_dsl.Query;
 import org.opensearch.client.opensearch._types.query_dsl.QueryBuilders;
+import org.opensearch.client.opensearch.core.search.Highlight;
+import org.opensearch.client.opensearch.core.search.HighlightField;
+import org.opensearch.client.opensearch.core.search.HighlighterType;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -56,12 +59,47 @@ public final class OpenSearchRequestBuilder {
             return buildFuzzyRequest(indexName, request);
         }
 
+        // Build queries and filters
         Query query = buildQueryAndFilters(request);
+
+        // Build aggregations
         Map<String, Aggregation> aggregationMap = buildAggregations(request);
 
-        return new org.opensearch.client.opensearch.core.SearchRequest.Builder()
-                .index(indexName).query(query)
-                .aggregations(aggregationMap).build();
+        // Build highlights
+        Highlight highlight = buildHighlights(request);
+
+        org.opensearch.client.opensearch.core.SearchRequest.Builder builder
+                = new org.opensearch.client.opensearch.core.SearchRequest.Builder();
+
+        builder.index(indexName).query(query);
+
+        if(aggregationMap != null && !aggregationMap.isEmpty()){
+            builder.aggregations(aggregationMap);
+        }
+
+        if(highlight != null) {
+                builder.highlight(highlight);
+        }
+
+        return builder.build();
+    }
+
+    private static Highlight buildHighlights(SearchRequest request) {
+        if(request.highlight() == null){
+            return null;
+        }
+
+        List<String> fields = request.highlight().fields();
+        Map<String, HighlightField> highlightFields = new HashMap<>();
+        for(String field : fields){
+            highlightFields.put(field, HighlightField.builder().numberOfFragments(1).build());
+        }
+
+        return Highlight.builder()
+                .fields(highlightFields)
+                .fragmentSize(50)
+                .numberOfFragments(50)
+                .build();
     }
 
     public static Query buildQueryAndFilters(SearchRequest request) {
@@ -87,6 +125,10 @@ public final class OpenSearchRequestBuilder {
     }
 
     private static Map<String, Aggregation> buildAggregations(SearchRequest request) {
+        if(request.facets() == null || request.facets().isEmpty()){
+            return null;
+        }
+
         Map<String, Aggregation> aggregationMap = new HashMap<>();
         List<Facet> facets = request.facets();
         for (Facet facet : facets) {

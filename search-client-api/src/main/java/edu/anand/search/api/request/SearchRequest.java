@@ -148,4 +148,6 @@ public class SearchRequest {
         this.size = count;
         return this;
     }
+
+
 }

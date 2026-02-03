@@ -14,6 +14,7 @@ import org.opensearch.client.opensearch.core.search.Hit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OpenSearchResponseBuilder {
 
@@ -26,6 +27,14 @@ public class OpenSearchResponseBuilder {
 
         if (response.hits().total() != null) {
             searchResult.setTotalHits(response.hits().total().value());
+        }
+
+        // Highlights
+        List<Hit<NamedField>> hits = response.hits().hits();
+        for(Hit<NamedField> hit : hits){
+            Map<String, List<String>> snippets = hit.highlight();
+            List<String> titleHighlights = snippets.get("title");
+            System.out.println(titleHighlights);
         }
 
         // Facets
