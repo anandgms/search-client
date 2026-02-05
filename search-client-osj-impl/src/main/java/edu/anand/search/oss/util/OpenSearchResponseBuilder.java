@@ -14,7 +14,6 @@ import org.opensearch.client.opensearch.core.search.Hit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class OpenSearchResponseBuilder {
 
@@ -31,11 +30,12 @@ public class OpenSearchResponseBuilder {
 
         // Highlights
         List<Hit<NamedField>> hits = response.hits().hits();
+        Map<String, HighlightResult> highlights = new HashMap<>();
         for(Hit<NamedField> hit : hits){
             Map<String, List<String>> snippets = hit.highlight();
-            List<String> titleHighlights = snippets.get("title");
-            System.out.println(titleHighlights);
+            highlights.put(hit.id(), new HighlightResult(snippets));
         }
+        searchResult.setHighlights(highlights);
 
         // Facets
         Map<String, Aggregate> aggregateMap = response.aggregations();
@@ -57,8 +57,6 @@ public class OpenSearchResponseBuilder {
                 searchResult.addFacet(entry.getKey(), facetResult);
             }
         }
-
-        System.out.println(searchResult.facets());
 
         return searchResult;
     }
@@ -92,9 +90,13 @@ public class OpenSearchResponseBuilder {
 
     private static @NonNull HistogramFacetResult getDateHistogramFacetResult(Map.Entry<String, Aggregate> entry) {
         List<DateHistogramBucket> buckets = entry.getValue().dateHistogram().buckets().array();
+
+        System.out.println(buckets);
+
         HistogramFacetResult result = new HistogramFacetResult(entry.getKey(), new HashMap<>());
         for (DateHistogramBucket bucket : buckets) {
             System.out.println(bucket);
+
             System.out.println(bucket.key() + " - " + bucket.docCount());
             result.addResult(bucket.key(), bucket.docCount());
         }

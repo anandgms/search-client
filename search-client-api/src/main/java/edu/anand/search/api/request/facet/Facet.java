@@ -5,5 +5,8 @@ public sealed interface Facet permits TermFacet,
         DateRangeFacet,
         HistogramFacet,
         DateHistogramFacet {
+
     String name();
+
+    String toString();
 }

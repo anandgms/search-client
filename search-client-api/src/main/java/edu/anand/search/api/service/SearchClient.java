@@ -131,8 +131,11 @@ public interface SearchClient {
 
     /**
      * Finds all documents that match the search criteria from the specified index.
-     * Pagination is controlled using the page and row properties in the SearchRequest.
-     * Note: Use the enableFuzzySearch method to perform n-gram searches.
+     * Pagination is controlled using the page and size in SearchRequest.
+     * 
+     * For suggestions (case-insensitive n-gram search), use fuzzyQuery instead of 
+     * query. Note that filters, facets, highlighting, pagination are ignored 
+     * in fuzzy search.
      */
     SearchResult search(String indexName, SearchRequest request);
 }

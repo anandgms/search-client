@@ -9,7 +9,7 @@ public class SimpleFilter implements Filter {
     }
 
     @Override
-    public String asString() {
+    public String toString() {
         return filter;
     }
 }

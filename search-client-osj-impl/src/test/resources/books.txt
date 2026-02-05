@@ -11,7 +11,7 @@
 {"id":"ecd34b39-e64c-4e9c-8aab-9f95a56f40f2","title":"Tha Casual Vacancy","author":"JK Rowling","publishDate":[2000,10,12],"price":9.99,"sellers":["Amazon","Barnes & Noble"]}
 {"id":"eaf81122-8e48-496e-8323-0b9e68004b47","title":"The Mystery of the Missing Cook","author":"Agatha Christie","publishDate":[1947,3,17],"price":1.99,"sellers":["Barnes & Noble"]}
 {"id":"fa25ddf1-1226-4ca9-9f7d-3d4fe611097a","title":"Airframe","author":"Michael Crichton","publishDate":[1997,6,21],"price":9.99,"sellers":["Barnes & Nobles","Used Book Store","Walmart","Amazon","Library"]}
-{"id":"f96c213c-2669-47c5-b072-336399fbed76","title":"Advances Transfiguration","author":"Minerva McGonagall","publishDate":[1987,4,21],"price":10.0,"sellers":["Tomes & Scrolls","Flourish & Blots","Plumes et Tome"]}
+{"id":"f96c213c-2669-47c5-b072-336399fbed76","title":"Advanced Transfiguration","author":"Minerva McGonagall","publishDate":[1987,4,21],"price":10.0,"sellers":["Tomes & Scrolls","Flourish & Blots","Plumes et Tome"]}
 {"id":"fafefc83-87a5-4f0d-921d-b21d14edfd7d","title":"Dumb Witness","author":"Agatha Christie","publishDate":[1970,4,21],"price":12.99,"sellers":["eBay","Amazon","Barnes & Noble"]}
 {"id":"f92b3c9a-3baf-402c-b5ba-368e246bfdb8","title":"The Final Case","author":"Agatha Christie","publishDate":[1961,9,5],"price":2.99,"sellers":["Amazon","Walmart","Barnes & Noble"]}
 {"id":"fcd34b39-e64c-4e9c-8aab-9f95a56f40f2","title":"Fantastic Beasts And Where To Find Them","author":"JK Rowling","publishDate":[2000,10,12],"price":9.99,"sellers":["Amazon","Barnes & Noble"]}

@@ -26,6 +26,14 @@ public final class ObjectMapperUtil {
         return mapper;
     }
 
+    public static <T> Map<String, Object> asMap(T document) {
+        ObjectMapper mapper = objectMapper();
+        return mapper.convertValue(
+                document, new TypeReference<>() {
+                }
+        );
+    }
+
     public static String asJson(Object object) {
         ObjectMapper mapper = objectMapper();
         try {
@@ -52,26 +60,18 @@ public final class ObjectMapperUtil {
         return mapper.convertValue(item, clazz);
     }
 
-    public static <T> T to(NamedField item, Class<T> clazz) {
-        if (item == null) {
+    public static <T> T to(NamedField document, Class<T> clazz) {
+        if (document == null) {
             return null;
         }
         ObjectMapper mapper = objectMapper();
-        return mapper.convertValue(item, clazz);
+        return mapper.convertValue(document, clazz);
     }
 
-    public static <T> List<T> to(List<NamedField> items, Class<T> clazz) {
-        if (items == null || items.isEmpty()) {
+    public static <T> List<T> to(List<NamedField> documents, Class<T> clazz) {
+        if (documents == null || documents.isEmpty()) {
             return Collections.emptyList();
         }
-        return items.stream().map(item -> to(item, clazz)).toList();
-    }
-
-    public static <T> Map<String, Object> asMap(T document) {
-        ObjectMapper mapper = objectMapper();
-        return mapper.convertValue(
-                document, new TypeReference<>() {
-                }
-        );
+        return documents.stream().map(item -> to(item, clazz)).toList();
     }
 }

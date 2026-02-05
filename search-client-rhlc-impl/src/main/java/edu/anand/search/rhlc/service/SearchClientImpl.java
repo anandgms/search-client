@@ -7,7 +7,6 @@ import edu.anand.search.api.result.SearchResult;
 import edu.anand.search.api.result.Status;
 import edu.anand.search.api.service.SearchClient;
 import edu.anand.search.api.util.ObjectMapperUtil;
-import org.opensearch.action.bulk.BulkProcessor;
 import org.opensearch.action.index.IndexRequest;
 import org.opensearch.action.index.IndexResponse;
 import org.opensearch.client.RequestOptions;

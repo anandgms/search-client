@@ -6,4 +6,4 @@ public enum Status {
         NoOp,
         NotFound,
         Updated;
-    }
+}

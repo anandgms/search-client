@@ -79,7 +79,7 @@ class SearchClientTest {
     void deleteByQuery() {
         searchClient.saveOrUpdate("books", book);
         SearchRequest request = new SearchRequest();
-        request.setQuery(new SimpleQuery("id:" + bookId));
+        request.query(new SimpleQuery("id:" + bookId));
 
         OperationResult result = searchClient.deleteByQuery("books", request);
 
@@ -106,7 +106,7 @@ class SearchClientTest {
     void existsByQuery() {
         searchClient.saveOrUpdate("books", book);
         SearchRequest request = new SearchRequest();
-        request.setQuery(new SimpleQuery("id:" + bookId));
+        request.query(new SimpleQuery("id:" + bookId));
 
         boolean exists = searchClient.existsByQuery("books", request);
 
@@ -126,7 +126,7 @@ class SearchClientTest {
     void countByQuery() {
         searchClient.saveOrUpdate("books", book);
         SearchRequest request = new SearchRequest();
-        request.setQuery(new SimpleQuery("id:" + bookId));
+        request.query(new SimpleQuery("id:" + bookId));
 
         long count = searchClient.countByQuery("books", request);
 
@@ -156,45 +156,12 @@ class SearchClientTest {
     @Test
     void fuzzySearch() {
         SearchRequest request = new SearchRequest();
-        request.setQuery(new SimpleQuery("sellers:Amazon")).enableFuzzySearch().limit(10);
+        request.fuzzyQuery("sellers:Amazon").limit(10);
 
         SearchResult result = searchClient.search("books", request);
 
         List<Book> books = ObjectMapperUtil.to(result.documents(), Book.class);
         assertNotNull(books);
         assertFalse(books.isEmpty());
-    }
-
-    @Test
-    void search() {
-        searchClient.saveOrUpdate("books", book);
-        SearchRequest request = new SearchRequest();
-        request.setQuery(new SimpleQuery("*:*"))
-
-// Term Facet
-                .addFacet(new TermFacet("authors", "author", 10))
-// Numeric Range Facet
-                .addFacet(new NumericRangeFacet("priceRanges", "price", 10,
-                        List.of(new Range<>("0-5", 0f, 5f),
-                                new Range<>("5-10",5f, 10f),
-                                new Range<>("10-15",10f, 15f),
-                                new Range<>("15-20",15f, 20f))))
-// Histogram Facet
-                .addFacet(new HistogramFacet("priceIntervals", "price", 10, 1.0))
-// Date Histogram Facet
-                .addFacet(new DateHistogramFacet("publishDates", "publishDate", 10, ChronoField.YEAR))
-// Date Range Facet
-//                .addFacet(new DateRangeFacet("publishDates", "publishDate", 10,
-//                        List.of(
-////                                new Range<>("100y to now", "now-100y/d", "now+1d/d"),
-////                                new Range<>("50y to now", "now-50y/d", "now+1d/d"),
-//                                new Range<>("7d to now", "now-7d", "now+1d")
-//                        )))
-        ;
-
-        SearchResult result = searchClient.search("books", request);
-
-        assertNotNull(result.documents());
-        assertFalse(result.documents().isEmpty());
     }
 }

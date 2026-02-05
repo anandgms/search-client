@@ -9,7 +9,7 @@ public class SimpleQuery implements Query {
     }
 
     @Override
-    public String asString() {
+    public String toString() {
         return query;
     }
 }

@@ -2,129 +2,98 @@ package edu.anand.search.api.request;
 
 import edu.anand.search.api.request.facet.Facet;
 import edu.anand.search.api.request.filter.Filter;
+import edu.anand.search.api.request.filter.SimpleFilter;
 import edu.anand.search.api.request.query.Query;
 import edu.anand.search.api.request.query.SimpleQuery;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class SearchRequest {
-    private String index;
-    private int page;
-    private int size;
     private Query query;
+    private boolean fuzzySearch = false;
     private List<Filter> filters;
     private List<Facet> facets;
-    private List<Sort> sort;
+    private Highlight highlight;
+    private int page;
+    private int size;
+    private int limit;  
+    private List<Sort> sortBy;
     private List<String> includeFields;
     private List<String> excludeFields;
-    private Highlight highlight;
-    private boolean fuzzy;
-
-    public String asString() {
-        return query.asString();
-    }
 
     public SearchRequest() {
         this.query = new SimpleQuery("*:*");
     }
 
-    public boolean fuzzy() {
-        return fuzzy;
-    }
-
-    public SearchRequest enableFuzzySearch() {
-        this.fuzzy = true;
-        return this;
-    }
-
-    public SearchRequest disableFuzzySearch() {
-        this.fuzzy = true;
-        return this;
-    }
-
-    public String index() {
-        return index;
-    }
-
-    public SearchRequest setIndex(String index) {
-        this.index = index;
-        return this;
-    }
-
-    public int page() {
-        return page;
-    }
-
-    public SearchRequest setPage(int page) {
+    public SearchRequest page(int page) {
         this.page = page;
         return this;
     }
 
+    public int page() {
+        return this.page;
+    }
+
+    public SearchRequest size(int size) {
+        this.size = size;
+        return this;
+    }
+
+    public int size() {
+        return this.size;
+    }
+
+    public SearchRequest limit(int maxResults) {
+        this.limit = maxResults;
+        return this;
+    }
+
     public int limit() {
-        return size;
+        return this.limit;
     }
 
-    public Query query() {
-        return query;
+    public SearchRequest query(String luceneQueryString) {
+        fuzzySearch = false;
+        this.query = new SimpleQuery(luceneQueryString);
+        return this;
     }
 
-    public SearchRequest setQuery(Query query) {
+    public SearchRequest query(String field, String value) {
+        fuzzySearch = false;
+        this.query = new SimpleQuery(field + ":" + value);
+        return this;
+    }
+
+    public SearchRequest query(Query query) {
+        fuzzySearch = false;
         this.query = query;
         return this;
     }
 
-    public List<Filter> filters() {
-        return filters;
-    }
-
-    public SearchRequest setFilters(List<Filter> filters) {
-        this.filters = filters;
+    public SearchRequest fuzzyQuery(String luceneQueryString) {
+        fuzzySearch = true;
+        this.query = new SimpleQuery(luceneQueryString);
         return this;
     }
 
-    public List<Facet> facets() {
-        return facets;
-    }
-
-    public SearchRequest setFacets(List<Facet> facets) {
-        this.facets = facets;
+    public SearchRequest fuzzyQuery(String field, String value) {
+        fuzzySearch = true;
+        this.query = new SimpleQuery(field + ":" + value);
         return this;
     }
 
-    public List<Sort> sortFields() {
-        return sort;
+    public boolean isFuzzySearch() {
+        return this.fuzzySearch;
     }
 
-    public SearchRequest setSort(List<Sort> sort) {
-        this.sort = sort;
-        return this;
+    public String query() {
+        return this.query.toString();
     }
 
-    public List<String> includeFields() {
-        return includeFields;
-    }
-
-    public SearchRequest setIncludeFields(List<String> includeFields) {
-        this.includeFields = includeFields;
-        return this;
-    }
-
-    public List<String> excludeFields() {
-        return excludeFields;
-    }
-
-    public SearchRequest setExcludeFields(List<String> excludeFields) {
-        this.excludeFields = excludeFields;
-        return this;
-    }
-
-    public Highlight highlight() {
-        return highlight;
-    }
-
-    public SearchRequest setHighlight(Highlight highlight) {
-        this.highlight = highlight;
+    public SearchRequest addFilter(String luceneQueryString) {
+        addFilter(new SimpleFilter(luceneQueryString));
         return this;
     }
 
@@ -136,6 +105,25 @@ public class SearchRequest {
         return this;
     }
 
+    public SearchRequest addFilters(Collection<Filter> filters) {
+        if (filters == null) {
+            filters = new ArrayList<>();
+        }
+        filters.addAll(filters);
+        return this;
+    }
+
+    public List<Filter> filters() {
+        return this.filters;
+    }
+
+    public SearchRequest clearFilters() {
+        if (filters != null) {
+            filters.clear();
+        }
+        return this;
+    }
+
     public SearchRequest addFacet(Facet facet) {
         if (facets == null) {
             facets = new ArrayList<>();
@@ -144,10 +132,122 @@ public class SearchRequest {
         return this;
     }
 
-    public SearchRequest limit(int count) {
-        this.size = count;
+    public SearchRequest addFacets(Collection<Facet> facets) {
+        if (facets == null) {
+            facets = new ArrayList<>();
+        }
+        facets.addAll(facets);
         return this;
     }
 
+    public SearchRequest addFacets(Facet... facets) {
+        if (this.facets == null) {
+            this.facets = new ArrayList<>();
+        }
+        for (Facet facet : facets) {
+            this.facets.add(facet);
+        }
+        return this;
+    }
 
+    public List<Facet> facets() {
+        return this.facets;
+    }
+
+    public SearchRequest clearFacets() {
+        if (facets != null) {
+            facets.clear();
+        }
+        return this;
+    }
+
+    public SearchRequest highlight(Highlight highlight) {
+        this.highlight = highlight;
+        return this;
+    }
+
+    public Highlight highlight() {
+        return this.highlight;
+    }
+
+    public SearchRequest sortBy(Sort soryBy) {
+        if (this.sortBy == null) {
+            this.sortBy = new ArrayList<>();
+        }
+        this.sortBy.add(soryBy);
+        return this;
+    }
+
+    public SearchRequest sortBy(List<Sort> sortBy) {
+        this.sortBy = sortBy;
+        return this;
+    }
+
+    public SearchRequest sortBy(Sort... sortBy) {
+        if (this.sortBy == null) {
+            this.sortBy = new ArrayList<>();
+        }
+        for (Sort sort : sortBy) {
+            this.sortBy.add(sort);
+        }
+        return this;
+    }
+
+    public List<Sort> sortBy() {
+        return this.sortBy;
+    }
+
+    public SearchRequest includeFields(List<String> includeFields) {
+        this.includeFields = includeFields;
+        return this;
+    }
+
+    public List<String> includeFields() {
+        return this.includeFields;
+    }
+
+    public SearchRequest includeFields(String... includeFields) {
+        if (this.includeFields == null) {
+            this.includeFields = new ArrayList<>();
+        }
+        for (String field : includeFields) {
+            this.includeFields.add(field);
+        }
+        return this;
+    }
+
+    public SearchRequest excludeFields(List<String> excludeFields) {
+        this.excludeFields = excludeFields;
+        return this;
+    }
+
+    public SearchRequest excludeFields(String... excludeFields) {
+        if (this.excludeFields == null) {
+            this.excludeFields = new ArrayList<>();
+        }
+        for (String field : excludeFields) {
+            this.excludeFields.add(field);
+        }
+        return this;
+    }
+
+    public List<String> excludeFields() {
+        return this.excludeFields;
+    }
+    
+    @Override
+    public String toString() {
+        return "SearchRequest{" +
+                "query=" + query +
+                ", filters=" + filters +
+                ", facets=" + facets +
+                ", highlight=" + highlight +
+                ", page=" + page +
+                ", size=" + size +
+                ", limit=" + limit +
+                ", sortBy=" + sortBy +
+                ", includeFields=" + includeFields +
+                ", excludeFields=" + excludeFields +
+                '}';
+    }
 }
