@@ -2,9 +2,9 @@ package edu.anand.search.api.request;
 
 import edu.anand.search.api.request.facet.Facet;
 import edu.anand.search.api.request.filter.Filter;
-import edu.anand.search.api.request.filter.SimpleFilter;
+import edu.anand.search.api.request.filter.LuceneFilter;
 import edu.anand.search.api.request.query.Query;
-import edu.anand.search.api.request.query.SimpleQuery;
+import edu.anand.search.api.request.query.LuceneQuery;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +24,7 @@ public class SearchRequest {
     private List<String> excludeFields;
 
     public SearchRequest() {
-        this.query = new SimpleQuery("*:*");
+        this.query = new LuceneQuery("*:*");
     }
 
     public SearchRequest page(int page) {
@@ -56,13 +56,13 @@ public class SearchRequest {
 
     public SearchRequest query(String luceneQueryString) {
         fuzzySearch = false;
-        this.query = new SimpleQuery(luceneQueryString);
+        this.query = new LuceneQuery(luceneQueryString);
         return this;
     }
 
     public SearchRequest query(String field, String value) {
         fuzzySearch = false;
-        this.query = new SimpleQuery(field + ":" + value);
+        this.query = new LuceneQuery(field + ":" + value);
         return this;
     }
 
@@ -74,13 +74,13 @@ public class SearchRequest {
 
     public SearchRequest fuzzyQuery(String luceneQueryString) {
         fuzzySearch = true;
-        this.query = new SimpleQuery(luceneQueryString);
+        this.query = new LuceneQuery(luceneQueryString);
         return this;
     }
 
     public SearchRequest fuzzyQuery(String field, String value) {
         fuzzySearch = true;
-        this.query = new SimpleQuery(field + ":" + value);
+        this.query = new LuceneQuery(field + ":" + value);
         return this;
     }
 
@@ -93,7 +93,7 @@ public class SearchRequest {
     }
 
     public SearchRequest addFilter(String luceneQueryString) {
-        addFilter(new SimpleFilter(luceneQueryString));
+        addFilter(new LuceneFilter(luceneQueryString));
         return this;
     }
 

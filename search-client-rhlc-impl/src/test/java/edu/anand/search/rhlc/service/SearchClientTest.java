@@ -1,8 +1,7 @@
 package edu.anand.search.rhlc.service;
 
 import edu.anand.search.api.request.SearchRequest;
-import edu.anand.search.api.request.facet.*;
-import edu.anand.search.api.request.query.SimpleQuery;
+import edu.anand.search.api.request.query.LuceneQuery;
 import edu.anand.search.api.result.OperationResult;
 import edu.anand.search.api.result.SearchResult;
 import edu.anand.search.api.result.Status;
@@ -21,7 +20,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -78,9 +76,9 @@ class SearchClientTest {
     @Test
     void deleteByQuery() {
         searchClient.saveOrUpdate("books", book);
-        SearchRequest request = new SearchRequest();
-        request.query(new SimpleQuery("id:" + bookId));
 
+        SearchRequest request = new SearchRequest();
+        request.query(new LuceneQuery("id:" + bookId));
         OperationResult result = searchClient.deleteByQuery("books", request);
 
         assertEquals(Status.Deleted, result.result());
@@ -106,7 +104,7 @@ class SearchClientTest {
     void existsByQuery() {
         searchClient.saveOrUpdate("books", book);
         SearchRequest request = new SearchRequest();
-        request.query(new SimpleQuery("id:" + bookId));
+        request.query(new LuceneQuery("id:" + bookId));
 
         boolean exists = searchClient.existsByQuery("books", request);
 
@@ -126,7 +124,7 @@ class SearchClientTest {
     void countByQuery() {
         searchClient.saveOrUpdate("books", book);
         SearchRequest request = new SearchRequest();
-        request.query(new SimpleQuery("id:" + bookId));
+        request.query(new LuceneQuery("id:" + bookId));
 
         long count = searchClient.countByQuery("books", request);
 

@@ -7,6 +7,7 @@ import edu.anand.search.api.request.facet.HistogramFacet;
 import edu.anand.search.api.request.facet.NumericRangeFacet;
 import edu.anand.search.api.request.facet.Range;
 import edu.anand.search.api.request.facet.TermFacet;
+import edu.anand.search.api.request.query.LuceneQuery;
 import edu.anand.search.api.result.OperationResult;
 import edu.anand.search.api.result.SearchResult;
 import edu.anand.search.api.result.Status;
@@ -27,6 +28,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoField;
 import java.util.*;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -288,5 +292,5 @@ class SearchClientTest {
 
         assertNotNull(result.documents());
         assertFalse(result.documents().isEmpty());
-    }
+   }
 }
