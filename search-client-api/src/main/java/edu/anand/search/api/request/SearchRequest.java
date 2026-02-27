@@ -8,7 +8,6 @@ import edu.anand.search.api.request.query.LuceneQuery;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.util.StringUtils;
@@ -16,15 +15,15 @@ import org.springframework.util.StringUtils;
 public class SearchRequest {
     private Query query;
     private boolean fuzzySearch = false;
-    private List<Filter> filters = Collections.emptyList();
-    private List<Facet> facets = Collections.emptyList();
+    private List<Filter> filters = new ArrayList<>();
+    private List<Facet> facets = new ArrayList<>();
     private Highlight highlight;
     private int page = 0;
     private int size = 10;
     private int limit = 10_000;
-    private List<Sort> sortBy = Collections.emptyList();
-    private List<String> includeFields = Collections.emptyList();
-    private List<String> excludeFields = Collections.emptyList();
+    private List<Sort> sortBy = new ArrayList<>();
+    private List<String> includeFields = new ArrayList<>();
+    private List<String> excludeFields = new ArrayList<>();
 
     public SearchRequest() {
         this.query = new LuceneQuery("*:*");

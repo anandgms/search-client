@@ -68,9 +68,6 @@ public final class SearchRequestBuilder {
         }
 
         org.opensearch.client.opensearch.core.SearchRequest searchRequest = builder.build();
-        
-        System.out.println(SearchRequestBuilder.toJson(searchRequest.query()));
-        
         return searchRequest;
     }
 

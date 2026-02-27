@@ -26,34 +26,36 @@ public class SearchController {
 
     @PostMapping("/run-query")
     public String runQuery(QueryForm query, Model model) {
+        model.addAttribute("query", query);
 
         SearchResult result = searchService.execute(query);
-
-        model.addAttribute("query", query);
         model.addAttribute("response", result);
         model.addAttribute("responseJson", result.getJson());
-        model.addAttribute("debugJson", result.getDebugJson());
 
         return "solr-query";
     }
 
     @PostMapping("/run-dih")
     public String runDataImport(QueryForm query, Model model) {
+        model.addAttribute("query", query);
         return "solr-query";
     }
 
     @PostMapping("/refresh-status")
     public String refreshStatus(QueryForm query, Model model) {
+        model.addAttribute("query", query);
         return "solr-query";
     }
 
     @PostMapping("/delete-delta")
     public String deleteDelta(QueryForm query, Model model) {
+        model.addAttribute("query", query);
         return "solr-query";
     }
 
     @PostMapping("/stop-jobs")
     public String stopJobs(QueryForm query, Model model) {
+        model.addAttribute("query", query);
         return "solr-query";
     }
 }

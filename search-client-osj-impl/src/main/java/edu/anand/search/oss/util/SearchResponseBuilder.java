@@ -90,14 +90,8 @@ public class SearchResponseBuilder {
 
     private static @NonNull HistogramFacetResult getDateHistogramFacetResult(Map.Entry<String, Aggregate> entry) {
         List<DateHistogramBucket> buckets = entry.getValue().dateHistogram().buckets().array();
-
-        System.out.println(buckets);
-
         HistogramFacetResult result = new HistogramFacetResult(entry.getKey(), new HashMap<>());
         for (DateHistogramBucket bucket : buckets) {
-            System.out.println(bucket);
-
-            System.out.println(bucket.key() + " - " + bucket.docCount());
             result.addResult(bucket.key(), bucket.docCount());
         }
         return result;

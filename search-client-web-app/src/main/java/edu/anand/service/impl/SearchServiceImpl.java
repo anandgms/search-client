@@ -35,11 +35,7 @@ public class SearchServiceImpl implements SearchService {
         request.page(query.getStart());
         request.size(query.getRows());
 
-        //System.out.println(query);
-        //System.out.println(request);        
-
         edu.anand.search.api.result.SearchResult result = searchClient.search(query.getSearchCore(), request);
-        //List<NamedField> docs = searchClient.findAll(query.getSearchCore(), NamedField.class);
         List<NamedField> docs = result.documents();
 
         SearchResult searchResult = new SearchResult();

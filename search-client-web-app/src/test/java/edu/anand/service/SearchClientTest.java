@@ -252,7 +252,6 @@ class SearchClientTest {
 
         assertNotNull(result.highlights());
         assertFalse(result.highlights().isEmpty());
-        System.out.println(result.highlights());
     }
 
     @Test
@@ -262,8 +261,6 @@ class SearchClientTest {
         request.query("*:*")
                 .limit(10)
                 .addFacet(new DateHistogramFacet("publishDates", "publishDate", ChronoField.MONTH_OF_YEAR));
-
-        System.out.println(request);
 
         SearchResult result = searchClient.search("books", request);
 

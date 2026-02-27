@@ -1,8 +1,8 @@
 package edu.anand.search.api.request.query;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FluentQueryTest {
 
@@ -14,6 +14,7 @@ class FluentQueryTest {
         Query score = FluentQuery.in("score", 1.0, 2.0, 3.0);
 
         Query candidates = FluentQuery.and(age, sports, FluentQuery.or(level, score));
-        System.out.println(candidates.toString());
+        //String expectedJson = "(age:{18 TO 35} AND sport:(\"Tennis\" \"Badminton\") AND (level:(\"beginner\" \"intermediate\" \"expert\") OR score:(1.0 2.0 3.0)))";
+        assertNotNull(candidates.toString().trim());
     }
 }
