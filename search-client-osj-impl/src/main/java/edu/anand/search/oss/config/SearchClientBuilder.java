@@ -1,6 +1,10 @@
 package edu.anand.search.oss.config;
 
+import edu.anand.search.api.service.SearchClient;
+import edu.anand.search.api.util.AbstractSearchClientBuilder;
 import edu.anand.search.api.util.ObjectMapperUtil;
+import edu.anand.search.oss.service.SearchClientImpl;
+
 import org.apache.hc.core5.http.HttpHost;
 import org.opensearch.client.json.jackson.JacksonJsonpMapper;
 import org.opensearch.client.opensearch.OpenSearchClient;
@@ -10,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ClientConfig {
+public class SearchClientBuilder extends AbstractSearchClientBuilder {
 
     @Bean
     public OpenSearchClient openSearchClient() {
@@ -21,5 +25,11 @@ public class ClientConfig {
                 .build();
 
         return new OpenSearchClient(transport);
+    }
+
+    @Override
+    protected SearchClient createClient() {
+        OpenSearchClient openSearchClient = openSearchClient();
+        return new SearchClientImpl(openSearchClient);
     }
 }

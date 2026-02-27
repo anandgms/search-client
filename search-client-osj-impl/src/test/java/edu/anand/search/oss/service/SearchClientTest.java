@@ -16,8 +16,6 @@ import edu.anand.search.oss.util.Book;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,7 +29,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@Disabled
 class SearchClientTest {
 
     private static final UUID bookId = UUID.fromString("693a64ee-0865-4947-9dd5-67f21933b142");

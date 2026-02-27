@@ -43,6 +43,15 @@ public final class ObjectMapperUtil {
         }
     }
 
+    public static String asPrettyJson(Object object) {
+        ObjectMapper mapper = objectMapper();
+        try {
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static <T> T to(String json, Class<T> clazz){
         ObjectMapper mapper = objectMapper();
         try {

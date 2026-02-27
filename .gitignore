@@ -1,6 +1,7 @@
+.vscode/
 /.idea/
 /search-client-api/target/
 /search-client-api/.mvn/
-/search-client-oss-impl/target/
 /search-client-osj-impl/target/
 /search-client-rhlc-impl/target/
+/search-client-web-app/target/

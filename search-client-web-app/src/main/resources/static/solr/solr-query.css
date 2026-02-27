@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background: #f3f3f3;
+}
+
+.header {
+    background: #2f5b8f;
+    color: white;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 40px);
+}
+
+.sidebar {
+    width: 300px;
+    background: #ffffff;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.content {
+    flex: 1;
+    padding: 10px;
+    overflow: auto;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.panel-header {
+    background: #e6e6e6;
+    padding: 6px 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+.panel-body {
+    padding: 10px;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    margin-top: 8px;
+    color: #333;
+}
+
+input[type=text], input[type=number], select, textarea {
+    width: 100%;
+    padding: 4px;
+    font-size: 13px;
+    margin-top: 2px;
+    box-sizing: border-box;
+}
+
+textarea {
+    font-family: monospace;
+    height: 600px;
+}
+
+.btn {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #1e3f66;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 5px;
+}
+
+.tab {
+    padding: 6px 12px;
+    cursor: pointer;
+    background: #e6e6e6;
+    margin-right: 2px;
+}
+
+.tab.active {
+    background: white;
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+th {
+    background: #f0f0f0;
+}
+
+.checkbox-group {
+    margin-bottom: 10px;
+}
+
+.checkbox-group label {
+    display: block;
+    padding: 1px 0;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.checkbox-group input {
+    margin-right: 6px;
+}

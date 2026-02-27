@@ -11,13 +11,10 @@ import org.opensearch.action.index.IndexRequest;
 import org.opensearch.action.index.IndexResponse;
 import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestHighLevelClient;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-@Service
 public class SearchClientImpl implements SearchClient {
 
     private final RestHighLevelClient restHighLevelClient;
