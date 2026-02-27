@@ -67,7 +67,11 @@ public final class SearchRequestBuilder {
                     .highlight(highlight);
         }
 
-        return builder.build();
+        org.opensearch.client.opensearch.core.SearchRequest searchRequest = builder.build();
+        
+        System.out.println(SearchRequestBuilder.toJson(searchRequest.query()));
+        
+        return searchRequest;
     }
 
     public static org.opensearch.client.opensearch.core.SearchRequest buildFuzzyRequest(String indexName, SearchRequest request) {
@@ -99,13 +103,13 @@ public final class SearchRequestBuilder {
     }
 
     private static void addFilters(SearchRequest request, BoolQuery.Builder builder) {
-        List<Query> filters = new ArrayList<>();
         if (request.filters() != null && !request.filters().isEmpty()) {
+            List<Query> filters = new ArrayList<>();
             request.filters().forEach(filter ->
                     filters.add(Query.of(q -> q.queryString(qs -> qs.query(filter.toString()))))
             );
+            builder.filter(filters);
         }
-        builder.filter(filters);
     }
 
     private static Map<String, Aggregation> buildAggregations(SearchRequest request) {
