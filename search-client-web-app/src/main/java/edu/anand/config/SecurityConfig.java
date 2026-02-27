@@ -1,4 +1,4 @@
-package edu.anand;
+package edu.anand.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

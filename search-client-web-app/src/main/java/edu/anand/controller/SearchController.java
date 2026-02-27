@@ -24,7 +24,6 @@ public class SearchController {
         return "solr-query";
     }
 
-
     @PostMapping("/run-query")
     public String executeQuery(QueryForm query, Model model) {
 

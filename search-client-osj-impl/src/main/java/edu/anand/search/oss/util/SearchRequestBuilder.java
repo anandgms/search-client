@@ -2,7 +2,6 @@ package edu.anand.search.oss.util;
 
 import edu.anand.search.api.request.SearchRequest;
 import edu.anand.search.api.request.facet.*;
-import edu.anand.search.api.util.ObjectMapperUtil;
 import jakarta.json.stream.JsonGenerator;
 import org.jspecify.annotations.NonNull;
 import org.opensearch.client.json.JsonData;
@@ -23,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class OpenSearchRequestBuilder {
+public final class SearchRequestBuilder {
 
     public static String toJson(Query query) {
         StringWriter writer = new StringWriter();

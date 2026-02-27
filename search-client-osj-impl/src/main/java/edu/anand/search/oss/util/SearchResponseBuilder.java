@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OpenSearchResponseBuilder {
+public class SearchResponseBuilder {
 
     public static SearchResult buildSearchResult(SearchResponse<NamedField> response) {
         SearchResult searchResult = new SearchResult();

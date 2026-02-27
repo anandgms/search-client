@@ -1,4 +1,4 @@
-package edu.anand.search.oss.util;
+package edu.anand.util;
 
 import edu.anand.search.api.dto.Document;
 

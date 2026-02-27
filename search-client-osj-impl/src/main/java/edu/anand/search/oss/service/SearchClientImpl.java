@@ -7,8 +7,8 @@ import edu.anand.search.api.result.OperationResult;
 import edu.anand.search.api.result.SearchResult;
 import edu.anand.search.api.result.Status;
 import edu.anand.search.api.service.SearchClient;
-import edu.anand.search.oss.util.OpenSearchRequestBuilder;
-import edu.anand.search.oss.util.OpenSearchResponseBuilder;
+import edu.anand.search.oss.util.SearchRequestBuilder;
+import edu.anand.search.oss.util.SearchResponseBuilder;
 import jakarta.annotation.Nonnull;
 import org.opensearch.client.opensearch.OpenSearchClient;
 import org.opensearch.client.opensearch._types.Refresh;
@@ -102,7 +102,7 @@ public class SearchClientImpl implements SearchClient {
 
     @Override
     public OperationResult deleteByQuery(String indexName, SearchRequest request) {
-        Query boolQuery = OpenSearchRequestBuilder.buildQueryAndFilters(request);
+        Query boolQuery = SearchRequestBuilder.buildQueryAndFilters(request);
         return deleteByQuery(indexName, boolQuery);
     }
 
@@ -159,7 +159,7 @@ public class SearchClientImpl implements SearchClient {
 
     @Override
     public long countByQuery(String indexName, SearchRequest request) {
-        Query boolQuery = OpenSearchRequestBuilder.buildQueryAndFilters(request);
+        Query boolQuery = SearchRequestBuilder.buildQueryAndFilters(request);
         CountRequest countRequest = new CountRequest.Builder().index(indexName).query(boolQuery).build();
         CountResponse response = null;
         try {
@@ -185,7 +185,7 @@ public class SearchClientImpl implements SearchClient {
     @Override
     public <T> List<T> findAll(String indexName, Class<T> clazz) {
         Query matchAllQuery = Query.of(q -> q.matchAll(m -> m));
-        org.opensearch.client.opensearch.core.SearchRequest searchRequest = OpenSearchRequestBuilder.buildRequest(indexName, matchAllQuery);
+        org.opensearch.client.opensearch.core.SearchRequest searchRequest = SearchRequestBuilder.buildRequest(indexName, matchAllQuery);
         SearchResponse<T> response;
         try {
             response = client.search(searchRequest, clazz);
@@ -197,11 +197,11 @@ public class SearchClientImpl implements SearchClient {
 
     @Override
     public SearchResult search(String indexName, SearchRequest request) {
-        org.opensearch.client.opensearch.core.SearchRequest searchRequest = OpenSearchRequestBuilder.buildRequest(indexName, request);
+        org.opensearch.client.opensearch.core.SearchRequest searchRequest = SearchRequestBuilder.buildRequest(indexName, request);
         SearchResponse<NamedField> response;
         try {
             response = client.search(searchRequest, NamedField.class);
-            return OpenSearchResponseBuilder.buildSearchResult(response);
+            return SearchResponseBuilder.buildSearchResult(response);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
