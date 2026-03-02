@@ -1,0 +1,18 @@
+{"id":"da25ddf1-1226-4ca9-9f7d-3d4fe611097a","title":"Jurassic Park","author":"Michael Crichton","publishDate":[1997,6,21],"price":9.99,"sellers":["Barnes & Nobles","Used Book Store","Walmart","Amazon","Library"]}
+{"id":"d96c213c-2669-47c5-b072-336399fbed76","title":"The Book of Spells","author":"Severus Snape","publishDate":[1987,4,21],"price":10.0,"sellers":["Tomes & Scrolls","Flourish & Blots","Plumes et Tome"]}
+{"id":"dafefc83-87a5-4f0d-921d-b21d14edfd7d","title":"Then There Were None","author":"Agatha Christie","publishDate":[1970,4,21],"price":12.99,"sellers":["eBay","Amazon","Barnes & Noble"]}
+{"id":"d92b3c9a-3baf-402c-b5ba-368e246bfdb8","title":"Murder of Roger Ackroyd","author":"Agatha Christie","publishDate":[1961,9,5],"price":2.99,"sellers":["Amazon","Walmart","Barnes & Noble"]}
+{"id":"dcd34b39-e64c-4e9c-8aab-9f95a56f40f2","title":"Harry Potter","author":"JK Rowling","publishDate":[2000,10,12],"price":9.99,"sellers":["Amazon","Barnes & Noble"]}
+{"id":"daf81122-8e48-496e-8323-0b9e68004b47","title":"Mysterious Affair at Styles","author":"Agatha Christie","publishDate":[1947,3,17],"price":1.99,"sellers":["Barnes & Noble"]}
+{"id":"ea25ddf1-1226-4ca9-9f7d-3d4fe611097a","title":"Jurassic Park 2","author":"Michael Crichton","publishDate":[1999,7,21],"price":9.99,"sellers":["Barnes & Nobles","Used Book Store","Walmart","Amazon","Library"]}
+{"id":"e96c213c-2669-47c5-b072-336399fbed76","title":"Advanced Potion Making","author":"Albus Dumbledore","publishDate":[1935,4,21],"price":10.0,"sellers":["Tomes & Scrolls","Flourish & Blots","Plumes et Tome"]}
+{"id":"eafefc83-87a5-4f0d-921d-b21d14edfd7d","title":"Three Act Tragedy","author":"Agatha Christie","publishDate":[1970,4,21],"price":12.99,"sellers":["eBay","Amazon","Barnes & Noble"]}
+{"id":"e92b3c9a-3baf-402c-b5ba-368e246bfdb8","title":"Miss Marple's Cases","author":"Agatha Christie","publishDate":[1961,9,5],"price":2.99,"sellers":["Amazon","Walmart","Barnes & Noble"]}
+{"id":"ecd34b39-e64c-4e9c-8aab-9f95a56f40f2","title":"Tha Casual Vacancy","author":"JK Rowling","publishDate":[2000,10,12],"price":9.99,"sellers":["Amazon","Barnes & Noble"]}
+{"id":"eaf81122-8e48-496e-8323-0b9e68004b47","title":"The Mystery of the Missing Cook","author":"Agatha Christie","publishDate":[1947,3,17],"price":1.99,"sellers":["Barnes & Noble"]}
+{"id":"fa25ddf1-1226-4ca9-9f7d-3d4fe611097a","title":"Airframe","author":"Michael Crichton","publishDate":[1997,6,21],"price":9.99,"sellers":["Barnes & Nobles","Used Book Store","Walmart","Amazon","Library"]}
+{"id":"f96c213c-2669-47c5-b072-336399fbed76","title":"Advanced Transfiguration","author":"Minerva McGonagall","publishDate":[1987,4,21],"price":10.0,"sellers":["Tomes & Scrolls","Flourish & Blots","Plumes et Tome"]}
+{"id":"fafefc83-87a5-4f0d-921d-b21d14edfd7d","title":"Dumb Witness","author":"Agatha Christie","publishDate":[1970,4,21],"price":12.99,"sellers":["eBay","Amazon","Barnes & Noble"]}
+{"id":"f92b3c9a-3baf-402c-b5ba-368e246bfdb8","title":"The Final Case","author":"Agatha Christie","publishDate":[1961,9,5],"price":2.99,"sellers":["Amazon","Walmart","Barnes & Noble"]}
+{"id":"fcd34b39-e64c-4e9c-8aab-9f95a56f40f2","title":"Fantastic Beasts And Where To Find Them","author":"JK Rowling","publishDate":[2000,10,12],"price":9.99,"sellers":["Amazon","Barnes & Noble"]}
+{"id":"faf81122-8e48-496e-8323-0b9e68004b47","title":"The A.B.C Murders","author":"Agatha Christie","publishDate":[1947,3,17],"price":1.99,"sellers":["Barnes & Noble"]}

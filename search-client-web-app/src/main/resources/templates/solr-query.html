@@ -1,0 +1,240 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Solr Admin - Query</title>
+    <link rel="stylesheet" href="solr-query.css" />
+  </head>
+  <body>
+    <form action="#" th:action="@{/solr/query}" method="post">
+      <div class="header">DIH Admin Panel</div>
+
+      <div class="container">
+        <!-- LEFT PANEL -->
+        <div class="sidebar">
+          <div class="panel">
+            <div class="panel-header">Data Import</div>
+
+            <div class="panel-body">
+              <label><strong>Action</strong></label>
+
+              <select name="actionType">
+                <option
+                  value="full"
+                  th:selected="${query.actionType == 'full'}"
+                >
+                  Full
+                </option>
+
+                <option
+                  value="delta"
+                  th:selected="${query.actionType == 'delta'}"
+                >
+                  Delta
+                </option>
+              </select>
+
+              <label><strong>Cores</strong></label>
+
+              <div class="checkbox-group">
+                <label>
+                  <input type="checkbox" id="cores" value="books" />
+                  Books
+                </label>
+
+                <label>
+                  <input type="checkbox" id="cores" value="authors" />
+                  Authors
+                </label>
+              </div>
+
+              <label><strong>Options</strong></label>
+
+              <div class="checkbox-group">
+                <label>
+                  <input type="checkbox" id="dihOptions" value="clean" />
+                  Clean
+                </label>
+
+                <label>
+                  <input type="checkbox" id="dihOptions" value="debug" />
+                  Debug
+                </label>
+              </div>
+
+              <button class="btn" type="submit" formaction="/solr/run-dih">
+                Run
+              </button>
+
+              <button
+                class="btn"
+                type="submit"
+                formaction="/solr/refresh-status"
+              >
+                Refresh Status
+              </button>
+
+              <label>
+                <input type="checkbox" id="autoRefresh" />
+                Auto Refresh (30s)
+              </label>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">Query Parameters</div>
+
+            <div class="panel-body">
+              <label><strong>Core</strong></label>
+              <select name="searchCore">
+                <option
+                  value="books"
+                  th:selected="${query.searchCore == 'books'}"
+                >
+                  Books
+                </option>
+
+                <option
+                  value="Authors"
+                  th:selected="${query.searchCore == 'authors'}"
+                >
+                  Authors
+                </option>
+              </select>
+
+              <label><strong>Query (q)</strong></label>
+              <input type="text" name="q" th:value="${query.q ?: '*:*'}" />
+
+              <label><strong>Filter Query (fq)</strong></label>
+              <input type="text" name="fq" th:value="${query.fq}" />
+
+              <label><strong>Start</strong></label>
+              <input
+                type="number"
+                name="start"
+                th:value="${query.start ?: 0}"
+              />
+
+              <label><strong>Rows</strong></label>
+              <input type="number" name="rows" th:value="${query.rows ?: 10}" />
+
+              <label><strong>Sort</strong></label>
+              <input type="text" name="sort" th:value="${query.sort}" />
+
+              <label><strong>Source</strong></label>
+              <input type="text" name="sort" th:value="${query.source}" />
+
+              <label><strong>Options</strong></label>
+
+              <div class="checkbox-group">
+                <label>
+                  <input type="checkbox" id="queryOptions" value="facet" />
+                  Facet
+                </label>
+
+                <label>
+                  <input type="checkbox" id="queryOptions" value="highlight" />
+                  Highlight
+                </label>
+              </div>
+
+              <button class="btn" type="submit" formaction="/solr/run-query">
+                Execute Query
+              </button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">Maintenance</div>
+
+            <div class="panel-body">
+              <button class="btn" type="submit" formaction="/solr/delete-delta">
+                Delete Delta Records
+              </button>
+
+              <button class="btn" type="submit" formaction="/solr/stop-jobs">
+                Stop All Jobs
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="content">
+          <div class="panel">
+            <div class="panel-header">Results</div>
+
+            <div class="panel-body">
+              <div class="tabs">
+                <div class="tab active" onclick="showTab('response')">
+                  Response
+                </div>
+
+                <div class="tab" onclick="showTab('json')">JSON</div>
+
+                <div class="tab" onclick="showTab('debug')">Debug</div>
+              </div>
+
+              <!-- RESPONSE TAB -->
+              <div id="response" class="tab-content active">
+                <!-- <div th:if="${response != null}">
+                        <div th:each="map : ${response.docs}">
+                            <div th:each="entry : ${map.entrySet()}">
+                                <span th:text="${entry.key}">Key</span>:
+                                <span th:text="${entry.value}">Value</span>
+                            </div>
+                        </div>
+                    </div> -->
+
+                <table th:if="${response != null}">
+                  <thead>
+                    <tr>
+                      <th
+                        th:each="field : ${response.fields}"
+                        th:text="${field}"
+                      ></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr th:each="doc : ${response.docs}">
+                      <td
+                        th:each="field : ${response.fields}"
+                        th:text="${doc.get(field)}"
+                      ></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- JSON TAB -->
+              <div id="json" class="tab-content">
+                <textarea readonly th:text="${responseJson}"> </textarea>
+              </div>
+
+              <!-- DEBUG TAB -->
+              <div id="debug" class="tab-content">
+                <textarea readonly th:text="${debugJson}"> </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function showTab(name) {
+          document
+            .querySelectorAll(".tab")
+            .forEach((t) => t.classList.remove("active"));
+
+          document
+            .querySelectorAll(".tab-content")
+            .forEach((t) => t.classList.remove("active"));
+
+          event.target.classList.add("active");
+
+          document.getElementById(name).classList.add("active");
+        }
+      </script>
+    </form>
+  </body>
+</html>
