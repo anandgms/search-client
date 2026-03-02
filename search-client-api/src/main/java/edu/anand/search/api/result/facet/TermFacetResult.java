@@ -4,7 +4,7 @@ import java.util.Map;
 
 public record TermFacetResult(String name, Map<String, Long> buckets) implements FacetResult {
 
-    public void addResult(String key, Long count){
-        buckets.put(key, count);
-    }
+  public void addResult(String key, Long count) {
+    buckets.put(key, count);
+  }
 }

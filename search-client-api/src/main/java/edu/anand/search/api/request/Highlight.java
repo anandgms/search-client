@@ -4,11 +4,8 @@ import java.util.List;
 
 public record Highlight(List<String> fields, String searchTerm) {
 
-    @Override
-    public String toString() {
-        return "Highlight{" +
-                "fields=" + fields +
-                ", searchTerm='" + searchTerm +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "Highlight{" + "fields=" + fields + ", searchTerm='" + searchTerm + '}';
+  }
 }

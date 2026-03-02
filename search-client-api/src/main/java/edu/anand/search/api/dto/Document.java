@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 public interface Document extends Serializable, Cloneable {
 
-    String docId();
+  String docId();
 }
